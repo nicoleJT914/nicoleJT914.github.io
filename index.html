@@ -151,6 +151,260 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-理解CSS-z-index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/06/理解CSS-z-index/">理解CSS:z-index</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/06/理解CSS-z-index/" class="archive-article-date">
+  	<time datetime="2017-03-06T06:17:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记得之前做毛玻璃效果时，在设置z-index时总是显示不出期望的效果，今天系统看了一下z-index，才明白并不只是设置数字大小的问题。<br>参考的依旧是是MDN上的文章，附原文链接<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index" target="_blank" rel="external">Understanding CSS z-index</a>。</p>
+<h2 id="默认堆叠-stacking-规则"><a href="#默认堆叠-stacking-规则" class="headerlink" title="默认堆叠(stacking)规则"></a>默认堆叠(stacking)规则</h2><p>当不存在<strong>浮动元素</strong>或对元素<strong>使用<code>z-index</code></strong>时，元素默认的堆叠规则为（这里的顺序为由下至上）：</p>
+<p>1.根元素的背景和边框<br>2.后代在HTML正常流中按顺序出现的块元素。（即后出现的blocks堆叠在先出现的blocks的上方）<br>3.后代在HTML正常流中按顺序出现的的定位块元素。</p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/910/=understanding_zindex_01.png" alt="默认堆叠规则图示说明"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#1~#4都为定位元素，因此按出现顺序进行堆叠，即DIV#2会堆叠在DIV#1上方，DIV#3会堆叠在DIV#2上方……；</li>
+<li>DIV#1位正常元素，会位于定位元素的下方，因此虽然DIV#1最早出现，但是却会在所有DIV元素的最下方。</li>
+</ul>
+<h2 id="浮动元素的堆叠"><a href="#浮动元素的堆叠" class="headerlink" title="浮动元素的堆叠"></a>浮动元素的堆叠</h2><p>根据堆叠规则，浮动块元素会被放置在非定位块和定位块之间。但是，我们知道浮动块会对它后方块元素中的文档流产生影响，即文档流会围绕浮动块。因此对于有浮动元素的参与的堆叠规则可定义如下：</p>
+<p>1.根元素的背景和边框<br>2.后代在HTML正常流中按顺序出现的块元素。<br>3.浮动块。<br>4.在正常流中的后代行内元素。<br>5.后代在HTML正常流中按顺序出现的的定位块元素。</p>
+<p><img src="http://i1.piimg.com/567571/ce9f0cec1ce083c3.png" alt="floating blocks example"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#4位非定位元素，置于堆叠的最下层；</li>
+<li>对于DIV#2和DIV#5，DIV#2是浮动块，DIV#5为DIV#2的后代定位块，因此DIV#5堆叠在DIV#2上方。</li>
+<li>对于DIV#1和DIV#3，虽然DIV#1是定位块，但要注意它并不是DIV#3的后代！因此按出现顺序DIV#3会堆叠在DIV#1的上方。这块可能有点难理解，要仔细阅读上面的堆叠规则。</li>
+</ul>
+<h2 id="加入z-index对堆叠规则的影响"><a href="#加入z-index对堆叠规则的影响" class="headerlink" title="加入z-index对堆叠规则的影响"></a>加入<code>z-index</code>对堆叠规则的影响</h2><p>z-index的规则大家都很熟悉了，可以为z-index设置一个数值（包括负值），数值越大，则处于堆叠的越上层。</p>
+<p>这里要注意的几点是：</p>
+<ul>
+<li>z-index只对<strong>定位元素</strong>有影响；</li>
+<li>当没有设定z-index样式时，元素默认的显示层为0；</li>
+<li>如果若干个元素具有相同的z-index值，则遵守默认堆叠规则。</li>
+</ul>
+<p><img src="http://p1.bqimg.com/567571/e7719b57e4376e61.png" alt="adding z-index example"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#5的z-index值为8，是所有DIV中最大的，但是因为它是非定位元素，所以z-index没有对其产生影响，依旧位于堆叠的最下层；</li>
+<li>DIV#1~#4按照z-index的数值大小排列，z-index值较小的在下层，较大的在上层。</li>
+</ul>
+<h2 id="堆叠上下文-Stacking-Context"><a href="#堆叠上下文-Stacking-Context" class="headerlink" title="堆叠上下文(Stacking Context)"></a>堆叠上下文(Stacking Context)</h2><p>之所以对元素设置z-index会影响堆叠的顺序，是因为z-index的设置会使得元素形成堆叠上下文。很多行为都会创建堆叠上下文，常见的如下：</p>
+<ul>
+<li>the root element (HTML)</li>
+<li>positioned (absolutely or relatively) with a z-index value other than “auto”</li>
+<li>a flex item with a z-index value other than “auto”,that is the parent element display: flex|inline-flex</li>
+<li>elements with an opacity value less than 1</li>
+<li>elements with a transform value other than “none”</li>
+<li>elements with a filter value other than “none”</li>
+<li>elements with a perspective value other than “none”</li>
+<li>position: fixed</li>
+</ul>
+<p>对于堆叠上下文，要注意的有以下几点：</p>
+<ul>
+<li>当父元素创建了一个堆叠上下文，在该堆叠上下文里，子元素会根据同样的堆叠规则进行堆叠。但是子元素的堆叠上下文只在其父元素中才有意义，并不会影响到父元素之外的元素；</li>
+<li>每个堆叠上下文是自包含的：先排列子元素的堆叠，再按照父元素在堆叠上下文的堆叠顺序考虑整个元素。</li>
+</ul>
+<p>EX1:考虑如下结构的HTML文档：</p>
+<ul>
+<li>Root<ul>
+<li>DIV#1</li>
+<li>DIV#2</li>
+<li>DIV#3<ul>
+<li>DIV#4</li>
+<li>DIV#5</li>
+<li>DIV#6<br>即DIV#1~#3是同级元素，DIV#4~#6是DIV#3的子元素</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i1.piimg.com/567571/37e3a56bc92e7b2d.png" alt="stacking context example1"></p>
+<p>说明：</p>
+<ul>
+<li>根元素HTML创建一个堆叠上下文，直接子元素DIV#1~3在这个堆叠上下文中进行排列；</li>
+<li>DIV#3也会创建一个堆叠上下文，直接子元素DIV#4~#6在DIV#3的堆叠上下文中进行排列；</li>
+<li>DIV#3子元素的堆叠不会影响到DIV#3外的元素，并且子元素的堆叠顺序跟随父元素DIV#3进行排列。所以可以看到DIV#4的z-index值虽然比DIV#1大，但由于DIV#3的z-index值比DIV#1小，因此DIV#4还是会排列在DIV#1下方；</li>
+</ul>
+<p>EX2:如果我们在上个列子中做一点改动，HTML结构不变，唯一的改变就是对DIV#3不设置Z-index：<br><img src="http://p1.bqimg.com/567571/54769e871b132a2a.png" alt="stacking context example2"></p>
+<p>说明：</p>
+<ul>
+<li>当对DIV#3不设置Z-index时，DIV#3就不会创建堆叠上下文，因此其子元素会参与到DIV#3的同级元素的比较；</li>
+<li>DIV#3默认z-index值为0，而DIV#4~6会与DIV#1和DIV#2进行排列，因此最后的排列顺序由下到上为：DIV#1&gt;DIV#5&gt;DIV#2&gt;DIV#6&gt;DIV#1&gt;DIV#4。</li>
+</ul>
+<p>如果能搞懂最后这两个列子，就算对z-index的理解了。写的比较粗略，具体demo和代码可以去看MDN的文章。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS/CSS3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端/" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/06/理解CSS-z-index/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-HTML-Forms" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/03/HTML-Forms/">HTML Forms</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/03/HTML-Forms/" class="archive-article-date">
+  	<time datetime="2017-03-03T12:20:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天复习了一下有关HTML表单元素的相关知识点。参考的是<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms" target="_blank" rel="external">MDN HTML forms</a>,不过中文网站好像还没有翻译。</p>
+<h2 id="原生表单插件（The-native-form-widgets）"><a href="#原生表单插件（The-native-form-widgets）" class="headerlink" title="原生表单插件（The native form widgets）"></a>原生表单插件（The native form widgets）</h2><p>做了一个演示在git上，可以对照着看</p>
+<ul>
+<li><a href="https://github.com/nicoleJT914/knowledge/blob/master/HTML-Forms.html" target="_blank" rel="external">code</a></li>
+<li><a href="https://nicolejt914.github.io/knowledge/HTML-Forms.html" target="_blank" rel="external">demo</a><h2 id="数据传送相关"><a href="#数据传送相关" class="headerlink" title="数据传送相关"></a>数据传送相关</h2><h3 id="1-客户端表单数据传送流程"><a href="#1-客户端表单数据传送流程" class="headerlink" title="1.客户端表单数据传送流程"></a>1.客户端表单数据传送流程</h3>client/server architecture：客户端（比如浏览器）使用HTTP协议向服务端（web服务器）发送请求，服务端响应请求传送回客户端。</li>
+<li><code>&lt;form&gt;</code>定义了如何发送数据。</li>
+<li><p><code>action</code>属性定义了数据发送到哪里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;form action=&quot;http://foo.com&quot;&gt;</div><div class="line">// 表示请求提交到表单当前所在页面</div><div class="line">&lt;form&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>method</code>属性定义了数据传送的类型<br>1.<code>get</code><br>请求返回给定资源<br>请求报文主体为空，要传送的数据显示在URL上，形式为<code>www.foo.com/?name=Jack&amp;pwd=123456</code><br>请求报文形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /?name=Jack&amp;pwd=123456 HTTP/1.1</div><div class="line">Host: foo.com</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>2.<code>post</code><br>请求HTTP请求主体提供数据的响应<br>传送数据包含在请求报文主体中，形式为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">POST / HTTP/1.1</div><div class="line">Host: foo.com</div><div class="line">Content-Type: application/x-www-form-urlencoded</div><div class="line">Content-Length: 13</div><div class="line"></div><div class="line">name=Jack&amp;pwd=123456</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>post</code>适合大量数据的传送，因为有些浏览器或者服务器可能会限制URL的大小。</p>
+</blockquote>
+<h3 id="2-特殊：传送文件"><a href="#2-特殊：传送文件" class="headerlink" title="2.特殊：传送文件"></a>2.特殊：传送文件</h3><ul>
+<li>特殊的原因：表单移交的数据是文本形式，而文件则被认为是二进制数据，因此在发送文件时需要一些特殊的要求。</li>
+<li>发送文件需要条件：<br><code>method=&quot;post&quot;</code>，因为文件内容不能被放到URL参数里。<br><code>enctype=&quot;multipart/form-data&quot;</code>,因为如果表单中存在文件和其他文本，数据将会被分为多个部分（文件和文本数据）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;label for=&quot;file&quot;&gt;Choose a file&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;file&quot; id=&quot;file&quot; name=&quot;myFile&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;button&gt;Send the file&lt;/button&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-安全问题"><a href="#3-安全问题" class="headerlink" title="3.安全问题"></a>3.安全问题</h3><ul>
+<li>XSS and CSRF</li>
+<li>SQL injection</li>
+<li>HTTP header injection and email injection<br>这块打算看了HTTP相关再来写。。。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML/HTML5</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端/" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/03/HTML-Forms/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-HTML5元素类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -566,6 +820,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲话</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS/CSS3</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,47 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>HTML5元素类型 | 一只游行的火烈鸟</title>
+  <title>理解CSS:z-index | 一只游行的火烈鸟</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="根据HTML5新规范，不再根据inline和block来区分元素类型。在HTML5新规范中，每个元素会规定如下两项：
-
-Content categories(元素的类型)
-Permitted content/content models(合法的元素内容)
-
-下图是元素类型的分类：
-Main content categories（大多数元素共享的内容规范）
-Metadata content
-
-Flo">
+  <meta name="description" content="记得之前做毛玻璃效果时，在设置z-index时总是显示不出期望的效果，今天系统看了一下z-index，才明白并不只是设置数字大小的问题。参考的依旧是是MDN上的文章，附原文链接Understanding CSS z-index。
+默认堆叠(stacking)规则当不存在浮动元素或对元素使用z-index时，元素默认的堆叠规则为（这里的顺序为由下至上）：
+1.根元素的背景和边框2.后代在HTML正常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML5元素类型">
-<meta property="og:url" content="http://yoursite.com/2017/02/28/HTML5元素类型/index.html">
+<meta property="og:title" content="理解CSS:z-index">
+<meta property="og:url" content="http://yoursite.com/2017/03/06/理解CSS-z-index/index.html">
 <meta property="og:site_name" content="一只游行的火烈鸟">
-<meta property="og:description" content="根据HTML5新规范，不再根据inline和block来区分元素类型。在HTML5新规范中，每个元素会规定如下两项：
-
-Content categories(元素的类型)
-Permitted content/content models(合法的元素内容)
-
-下图是元素类型的分类：
-Main content categories（大多数元素共享的内容规范）
-Metadata content
-
-Flo">
-<meta property="og:image" content="https://developer.mozilla.org/@api/deki/files/6244/=Content_categories_venn.png?size=webview">
-<meta property="og:updated_time" content="2017-02-28T11:44:05.000Z">
+<meta property="og:description" content="记得之前做毛玻璃效果时，在设置z-index时总是显示不出期望的效果，今天系统看了一下z-index，才明白并不只是设置数字大小的问题。参考的依旧是是MDN上的文章，附原文链接Understanding CSS z-index。
+默认堆叠(stacking)规则当不存在浮动元素或对元素使用z-index时，元素默认的堆叠规则为（这里的顺序为由下至上）：
+1.根元素的背景和边框2.后代在HTML正常">
+<meta property="og:image" content="https://developer.mozilla.org/@api/deki/files/910/=understanding_zindex_01.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/ce9f0cec1ce083c3.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/e7719b57e4376e61.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/37e3a56bc92e7b2d.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/54769e871b132a2a.png">
+<meta property="og:updated_time" content="2017-03-06T08:52:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTML5元素类型">
-<meta name="twitter:description" content="根据HTML5新规范，不再根据inline和block来区分元素类型。在HTML5新规范中，每个元素会规定如下两项：
-
-Content categories(元素的类型)
-Permitted content/content models(合法的元素内容)
-
-下图是元素类型的分类：
-Main content categories（大多数元素共享的内容规范）
-Metadata content
-
-Flo">
-<meta name="twitter:image" content="https://developer.mozilla.org/@api/deki/files/6244/=Content_categories_venn.png?size=webview">
+<meta name="twitter:title" content="理解CSS:z-index">
+<meta name="twitter:description" content="记得之前做毛玻璃效果时，在设置z-index时总是显示不出期望的效果，今天系统看了一下z-index，才明白并不只是设置数字大小的问题。参考的依旧是是MDN上的文章，附原文链接Understanding CSS z-index。
+默认堆叠(stacking)规则当不存在浮动元素或对元素使用z-index时，元素默认的堆叠规则为（这里的顺序为由下至上）：
+1.根元素的背景和边框2.后代在HTML正常">
+<meta name="twitter:image" content="https://developer.mozilla.org/@api/deki/files/910/=understanding_zindex_01.png">
   
     <link rel="alternative" href="/atom.xml" title="一只游行的火烈鸟" type="application/atom+xml">
   
@@ -182,58 +165,101 @@ Flo">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HTML5元素类型" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-理解CSS-z-index" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HTML5元素类型
+      理解CSS:z-index
     </h1>
   
 
         
-        <a href="/2017/02/28/HTML5元素类型/" class="archive-article-date">
-  	<time datetime="2017-02-28T11:20:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-28</time>
+        <a href="/2017/03/06/理解CSS-z-index/" class="archive-article-date">
+  	<time datetime="2017-03-06T06:17:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>根据HTML5新规范，不再根据inline和block来区分元素类型。在HTML5新规范中，每个元素会规定如下两项：</p>
-<ol>
-<li>Content categories(元素的类型)</li>
-<li>Permitted content/content models(合法的元素内容)</li>
-</ol>
-<p>下图是元素类型的分类：<br><img src="https://developer.mozilla.org/@api/deki/files/6244/=Content_categories_venn.png?size=webview" alt="元素类型"></p>
-<h2 id="Main-content-categories（大多数元素共享的内容规范）"><a href="#Main-content-categories（大多数元素共享的内容规范）" class="headerlink" title="Main content categories（大多数元素共享的内容规范）"></a>Main content categories（大多数元素共享的内容规范）</h2><ul>
-<li><p>Metadata content</p>
-</li>
-<li><p>Flow content<br>通常包含文本或嵌入内容</p>
-</li>
-<li><p>Sectioning content<br>会在当前大纲创建section<br><code>article</code>，<code>aside</code>，<code>nav</code>，<code>section</code></p>
-</li>
-<li><p>Heading content<br>定义section的标题<br><code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code><br>Note：虽然<code>&lt;header&gt;</code> 包含heading content，但其本身不是这一类</p>
-</li>
-<li><p>Phrasing content<br>定义文本和它包含的标记，Phrasing content组成段落</p>
-</li>
-<li><p>Embedded content<br>导入另一个资源或将来自另一种标记语言或命名空间的内容插入到文档中。<br><code>&lt;audio&gt;</code>，<code>&lt;canvas&gt;</code>，<code>&lt;iframe&gt;</code>，<code>&lt;img&gt;</code>，<code>&lt;svg&gt;</code>，<code>&lt;vedio&gt;</code>等</p>
-</li>
-<li><p>Interactive content<br>为用户交互设计的元素<br><code>&lt;a&gt;</code>,<code>&lt;button&gt;</code>,<code>&lt;select&gt;</code>,<code>&lt;textarea&gt;</code>等</p>
-</li>
-<li><p>Palpable content<br>元素不是空或隐藏</p>
-</li>
-<li><p>Form-associated content<br>表单相关元素<br><code>&lt;button&gt;</code>,<code>&lt;fieldset&gt;</code>,<code>&lt;input&gt;</code>,<code>&lt;label&gt;</code>等</p>
+        <p>记得之前做毛玻璃效果时，在设置z-index时总是显示不出期望的效果，今天系统看了一下z-index，才明白并不只是设置数字大小的问题。<br>参考的依旧是是MDN上的文章，附原文链接<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index" target="_blank" rel="external">Understanding CSS z-index</a>。</p>
+<h2 id="默认堆叠-stacking-规则"><a href="#默认堆叠-stacking-规则" class="headerlink" title="默认堆叠(stacking)规则"></a>默认堆叠(stacking)规则</h2><p>当不存在<strong>浮动元素</strong>或对元素<strong>使用<code>z-index</code></strong>时，元素默认的堆叠规则为（这里的顺序为由下至上）：</p>
+<p>1.根元素的背景和边框<br>2.后代在HTML正常流中按顺序出现的块元素。（即后出现的blocks堆叠在先出现的blocks的上方）<br>3.后代在HTML正常流中按顺序出现的的定位块元素。</p>
+<p><img src="https://developer.mozilla.org/@api/deki/files/910/=understanding_zindex_01.png" alt="默认堆叠规则图示说明"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#1~#4都为定位元素，因此按出现顺序进行堆叠，即DIV#2会堆叠在DIV#1上方，DIV#3会堆叠在DIV#2上方……；</li>
+<li>DIV#1位正常元素，会位于定位元素的下方，因此虽然DIV#1最早出现，但是却会在所有DIV元素的最下方。</li>
+</ul>
+<h2 id="浮动元素的堆叠"><a href="#浮动元素的堆叠" class="headerlink" title="浮动元素的堆叠"></a>浮动元素的堆叠</h2><p>根据堆叠规则，浮动块元素会被放置在非定位块和定位块之间。但是，我们知道浮动块会对它后方块元素中的文档流产生影响，即文档流会围绕浮动块。因此对于有浮动元素的参与的堆叠规则可定义如下：</p>
+<p>1.根元素的背景和边框<br>2.后代在HTML正常流中按顺序出现的块元素。<br>3.浮动块。<br>4.在正常流中的后代行内元素。<br>5.后代在HTML正常流中按顺序出现的的定位块元素。</p>
+<p><img src="http://i1.piimg.com/567571/ce9f0cec1ce083c3.png" alt="floating blocks example"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#4位非定位元素，置于堆叠的最下层；</li>
+<li>对于DIV#2和DIV#5，DIV#2是浮动块，DIV#5为DIV#2的后代定位块，因此DIV#5堆叠在DIV#2上方。</li>
+<li>对于DIV#1和DIV#3，虽然DIV#1是定位块，但要注意它并不是DIV#3的后代！因此按出现顺序DIV#3会堆叠在DIV#1的上方。这块可能有点难理解，要仔细阅读上面的堆叠规则。</li>
+</ul>
+<h2 id="加入z-index对堆叠规则的影响"><a href="#加入z-index对堆叠规则的影响" class="headerlink" title="加入z-index对堆叠规则的影响"></a>加入<code>z-index</code>对堆叠规则的影响</h2><p>z-index的规则大家都很熟悉了，可以为z-index设置一个数值（包括负值），数值越大，则处于堆叠的越上层。</p>
+<p>这里要注意的几点是：</p>
+<ul>
+<li>z-index只对<strong>定位元素</strong>有影响；</li>
+<li>当没有设定z-index样式时，元素默认的显示层为0；</li>
+<li>如果若干个元素具有相同的z-index值，则遵守默认堆叠规则。</li>
+</ul>
+<p><img src="http://p1.bqimg.com/567571/e7719b57e4376e61.png" alt="adding z-index example"><br>(DIV#1~#5均为同级元素)</p>
+<p>说明：</p>
+<ul>
+<li>DIV#5的z-index值为8，是所有DIV中最大的，但是因为它是非定位元素，所以z-index没有对其产生影响，依旧位于堆叠的最下层；</li>
+<li>DIV#1~#4按照z-index的数值大小排列，z-index值较小的在下层，较大的在上层。</li>
+</ul>
+<h2 id="堆叠上下文-Stacking-Context"><a href="#堆叠上下文-Stacking-Context" class="headerlink" title="堆叠上下文(Stacking Context)"></a>堆叠上下文(Stacking Context)</h2><p>之所以对元素设置z-index会影响堆叠的顺序，是因为z-index的设置会使得元素形成堆叠上下文。很多行为都会创建堆叠上下文，常见的如下：</p>
+<ul>
+<li>the root element (HTML)</li>
+<li>positioned (absolutely or relatively) with a z-index value other than “auto”</li>
+<li>a flex item with a z-index value other than “auto”,that is the parent element display: flex|inline-flex</li>
+<li>elements with an opacity value less than 1</li>
+<li>elements with a transform value other than “none”</li>
+<li>elements with a filter value other than “none”</li>
+<li>elements with a perspective value other than “none”</li>
+<li>position: fixed</li>
+</ul>
+<p>对于堆叠上下文，要注意的有以下几点：</p>
+<ul>
+<li>当父元素创建了一个堆叠上下文，在该堆叠上下文里，子元素会根据同样的堆叠规则进行堆叠。但是子元素的堆叠上下文只在其父元素中才有意义，并不会影响到父元素之外的元素；</li>
+<li>每个堆叠上下文是自包含的：先排列子元素的堆叠，再按照父元素在堆叠上下文的堆叠顺序考虑整个元素。</li>
+</ul>
+<p>EX1:考虑如下结构的HTML文档：</p>
+<ul>
+<li>Root<ul>
+<li>DIV#1</li>
+<li>DIV#2</li>
+<li>DIV#3<ul>
+<li>DIV#4</li>
+<li>DIV#5</li>
+<li>DIV#6<br>即DIV#1~#3是同级元素，DIV#4~#6是DIV#3的子元素</li>
+</ul>
 </li>
 </ul>
-<p><strong>以上只是简单举了几个列子，更详细的可以在MDN，搜索具体HTML元素，就会看到元素的类型以及允许内容了</strong></p>
-<h2 id="Transparent-content-model"><a href="#Transparent-content-model" class="headerlink" title="Transparent content model"></a>Transparent content model</h2><p>这类元素本身内部可以有任何类型的内容，是否合法要看其父元素的 content model 和其内容的 categories。比如<code>&lt;a&gt;</code>。</p>
-<p><em>E.X.</em>  判断<code>&lt;p&gt;</code>&gt;<code>&lt;ins&gt;</code>&gt;<code>&lt;a&gt;</code>&gt;<code>&lt;div&gt;</code>是否合法<br><code>&lt;p&gt;</code>’s content model is Phrasing content, and <code>&lt;ins&gt;</code>’s categories are Phrasing content or Flow content, so <code>&lt;p&gt;</code>&gt;<code>&lt;ins&gt;</code> is allowed.</p>
-<p><code>&lt;ins&gt;</code>’s content model is transparent, so it’s depend on <code>&lt;p&gt;</code>&gt;<code>&lt;a&gt;</code>. And <code>&lt;a&gt;</code>’s categories contains Phrasing content, so <code>&lt;p&gt;</code>&gt;<code>&lt;ins&gt;</code>&gt;<code>&lt;a&gt;</code> is allowed.</p>
-<p><code>&lt;a&gt;</code>’s content model is transparent, and <code>&lt;div&gt;</code>’s categories don’t involve Phrasing content, so <code>&lt;p&gt;</code>&gt;<code>&lt;ins&gt;</code>&gt;<code>&lt;a&gt;</code>&gt;<code>&lt;div&gt;</code> is illegal.</p>
-<p>参考资料：<br>【1】 <a href="https://www.zhihu.com/question/34952563/answer/60672228" target="_blank" rel="external">a 标签为什么能够包含块级元素？ - 顾轶灵的回答 - 知乎</a><br>【2】 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories" target="_blank" rel="external">Content categories - Web developer guides | MDN</a></p>
+</li>
+</ul>
+<p><img src="http://i1.piimg.com/567571/37e3a56bc92e7b2d.png" alt="stacking context example1"></p>
+<p>说明：</p>
+<ul>
+<li>根元素HTML创建一个堆叠上下文，直接子元素DIV#1~3在这个堆叠上下文中进行排列；</li>
+<li>DIV#3也会创建一个堆叠上下文，直接子元素DIV#4~#6在DIV#3的堆叠上下文中进行排列；</li>
+<li>DIV#3子元素的堆叠不会影响到DIV#3外的元素，并且子元素的堆叠顺序跟随父元素DIV#3进行排列。所以可以看到DIV#4的z-index值虽然比DIV#1大，但由于DIV#3的z-index值比DIV#1小，因此DIV#4还是会排列在DIV#1下方；</li>
+</ul>
+<p>EX2:如果我们在上个列子中做一点改动，HTML结构不变，唯一的改变就是对DIV#3不设置Z-index：<br><img src="http://p1.bqimg.com/567571/54769e871b132a2a.png" alt="stacking context example2"></p>
+<p>说明：</p>
+<ul>
+<li>当对DIV#3不设置Z-index时，DIV#3就不会创建堆叠上下文，因此其子元素会参与到DIV#3的同级元素的比较；</li>
+<li>DIV#3默认z-index值为0，而DIV#4~6会与DIV#1和DIV#2进行排列，因此最后的排列顺序由下到上为：DIV#1&gt;DIV#5&gt;DIV#2&gt;DIV#6&gt;DIV#1&gt;DIV#4。</li>
+</ul>
+<p>如果能搞懂最后这两个列子，就算对z-index的理解了。写的比较粗略，具体demo和代码可以去看MDN的文章。</p>
 
       
 
@@ -247,7 +273,7 @@ Flo">
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HTML/HTML5</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS/CSS3</a>
         		</li>
       		
 		</ul>
@@ -318,7 +344,7 @@ Flo">
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/28/HTML5元素类型/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/06/理解CSS-z-index/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -332,18 +358,9 @@ Flo">
   
 <nav id="article-nav">
   
-    <a href="/2017/03/03/HTML-Forms/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          HTML Forms
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/02/27/【译】HTML5大纲算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【译】HTML5大纲算法</div>
+    <a href="/2017/03/03/HTML-Forms/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTML Forms</div>
       <i class="icon-circle-right"></i>
     </a>
   
